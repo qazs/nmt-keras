@@ -31,18 +31,19 @@ def load_tests_params():
     params['DOUBLE_STOCHASTIC_ATTENTION_REG'] = 0.7
     params['RELOAD'] = 0
     params['MAX_EPOCH'] = 1
+    params['USE_CUDNN'] = False
 
     return params
 
 
-def test_NMT_Unidir_deep_LSTM_LSTM():
+def test_NMT_Unidir_deep_GRU_LSTM():
     params = load_tests_params()
 
-    # Current test params: Single layered LSTM - LSTM
+    # Current test params: Single layered GRU - LSTM
     params['BIDIRECTIONAL_ENCODER'] = False
     params['N_LAYERS_ENCODER'] = 2
     params['BIDIRECTIONAL_DEEP_ENCODER'] = False
-    params['ENCODER_RNN_TYPE'] = 'LSTM'
+    params['ENCODER_RNN_TYPE'] = 'GRU'
     params['DECODER_RNN_TYPE'] = 'LSTM'
     params['N_LAYERS_DECODER'] = 2
 

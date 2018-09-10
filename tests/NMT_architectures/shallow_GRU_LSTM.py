@@ -30,19 +30,20 @@ def load_tests_params():
     params['DOUBLE_STOCHASTIC_ATTENTION_REG'] = 0.7
     params['RELOAD'] = 0
     params['MAX_EPOCH'] = 1
+    params['USE_CUDNN'] = False
 
     return params
 
 
-def test_NMT_Bidir_GRU_ConditionalLSTM():
+def test_NMT_Bidir_GRU_LSTM():
     params = load_tests_params()
 
-    # Current test params: Single layered GRU - ConditionalLSTM
+    # Current test params: Single layered GRU - LSTM
     params['BIDIRECTIONAL_ENCODER'] = True
     params['N_LAYERS_ENCODER'] = 1
     params['BIDIRECTIONAL_DEEP_ENCODER'] = False
     params['ENCODER_RNN_TYPE'] = 'GRU'
-    params['DECODER_RNN_TYPE'] = 'ConditionalLSTM'
+    params['DECODER_RNN_TYPE'] = 'LSTM'
     params['N_LAYERS_DECODER'] = 1
 
     params['REBUILD_DATASET'] = True
@@ -92,15 +93,15 @@ def test_NMT_Bidir_GRU_ConditionalLSTM():
     print ("Done")
 
 
-def test_NMT_Unidir_GRU_ConditionalLSTM():
+def test_NMT_Unidir_GRU_LSTM():
     params = load_tests_params()
 
-    # Current test params: Single layered GRU - ConditionalLSTM
+    # Current test params: Single layered GRU - LSTM
     params['BIDIRECTIONAL_ENCODER'] = False
     params['N_LAYERS_ENCODER'] = 1
     params['BIDIRECTIONAL_DEEP_ENCODER'] = False
     params['ENCODER_RNN_TYPE'] = 'GRU'
-    params['DECODER_RNN_TYPE'] = 'ConditionalLSTM'
+    params['DECODER_RNN_TYPE'] = 'LSTM'
     params['N_LAYERS_DECODER'] = 1
 
     params['REBUILD_DATASET'] = True
