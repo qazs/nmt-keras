@@ -30,19 +30,20 @@ def load_tests_params():
     params['DOUBLE_STOCHASTIC_ATTENTION_REG'] = 0.7
     params['RELOAD'] = 0
     params['MAX_EPOCH'] = 1
+    params['USE_CUDNN'] = False
 
     return params
 
 
-def test_NMT_Unidir_deep_GRU_ConditionalLSTM():
+def test_NMT_Unidir_deep_GRU_ConditionalGRU():
     params = load_tests_params()
 
-    # Current test params: Single layered GRU - GRU
+    # Current test params: Two-layered GRU - ConditionalGRU
     params['BIDIRECTIONAL_ENCODER'] = False
     params['N_LAYERS_ENCODER'] = 2
     params['BIDIRECTIONAL_DEEP_ENCODER'] = False
     params['ENCODER_RNN_TYPE'] = 'GRU'
-    params['DECODER_RNN_TYPE'] = 'ConditionalLSTM'
+    params['DECODER_RNN_TYPE'] = 'ConditionalGRU'
     params['N_LAYERS_DECODER'] = 2
 
     params['REBUILD_DATASET'] = True
