@@ -6,11 +6,11 @@ def load_parameters():
     """
 
     # Input data params
-    TASK_NAME = 'EuTrans'                           # Task name.
+    TASK_NAME = 'CnTrans'                           # Task name.
     DATASET_NAME = TASK_NAME                        # Dataset name.
-    SRC_LAN = 'es'                                  # Language of the source text.
-    TRG_LAN = 'en'                                  # Language of the target text.
-    DATA_ROOT_PATH = 'examples/%s/' % DATASET_NAME  # Path where data is stored.
+    SRC_LAN = 'en'                                  # Language of the source text.
+    TRG_LAN = 'cn'                                  # Language of the target text.
+    DATA_ROOT_PATH = 'app/%s/' % DATASET_NAME  # Path where data is stored.
 
     # SRC_LAN or TRG_LAN will be added to the file names.
     TEXT_FILES = {'train': 'training.',        # Data files.
@@ -29,13 +29,13 @@ def load_parameters():
     EVAL_ON_SETS_KERAS = []                       # Possible values: 'train', 'val' and 'test' (Keras' evaluator). Untested..
     START_EVAL_ON_EPOCH = 1                       # First epoch to start the model evaluation.
     EVAL_EACH_EPOCHS = True                       # Select whether evaluate between N epochs or N updates.
-    EVAL_EACH = 1                                 # Sets the evaluation frequency (epochs or updates).
+    EVAL_EACH = 5                                 # Sets the evaluation frequency (epochs or updates).
 
     # Search parameters
     SAMPLING = 'max_likelihood'                   # Possible values: multinomial or max_likelihood (recommended).
     TEMPERATURE = 1                               # Multinomial sampling parameter.
     BEAM_SEARCH = True                            # Switches on-off the beam search procedure.
-    BEAM_SIZE = 6                                 # Beam size (in case of BEAM_SEARCH == True).
+    BEAM_SIZE = 10                                 # Beam size (in case of BEAM_SEARCH == True).
     OPTIMIZED_SEARCH = True                       # Compute annotations only a single time per sample.
     SEARCH_PRUNING = False                        # Apply pruning strategies to the beam search method.
                                                   # It will likely increase decoding speed, but decrease quality.
@@ -58,7 +58,7 @@ def load_parameters():
     ALPHA_FACTOR = .6                             # Normalization according to |h|**ALPHA_FACTOR.
 
     # Sampling params: Show some samples during training.
-    SAMPLE_ON_SETS = ['train', 'val']             # Possible values: 'train', 'val' and 'test'.
+    SAMPLE_ON_SETS = []            # Possible values: 'train', 'val' and 'test'.
     N_SAMPLES = 5                                 # Number of samples generated.
     START_SAMPLING_ON_EPOCH = 1                   # First epoch where to start the sampling counter.
     SAMPLE_EACH_UPDATES = 300                     # Sampling frequency (always in #updates).
@@ -103,13 +103,13 @@ def load_parameters():
                                                   # otherwise it will be truncated to these most frequent words.
     MIN_OCCURRENCES_INPUT_VOCAB = 0               # Minimum number of occurrences allowed for the words in the input vocabulary.
                                                   # Set to 0 for using them all.
-    MAX_INPUT_TEXT_LEN = 50                       # Maximum length of the input sequence.
+    MAX_INPUT_TEXT_LEN = 100                       # Maximum length of the input sequence.
 
     # Output text parameters
     OUTPUT_VOCABULARY_SIZE = 0                    # Size of the input vocabulary. Set to 0 for using all,
                                                   # otherwise it will be truncated to these most frequent words.
     MIN_OCCURRENCES_OUTPUT_VOCAB = 0              # Minimum number of occurrences allowed for the words in the output vocabulary.
-    MAX_OUTPUT_TEXT_LEN = 50                      # Maximum length of the output sequence.
+    MAX_OUTPUT_TEXT_LEN = 100                      # Maximum length of the output sequence.
                                                   # set to 0 if we want to use the whole answer as a single class.
     MAX_OUTPUT_TEXT_LEN_TEST = MAX_OUTPUT_TEXT_LEN * 3  # Maximum length of the output sequence during test time.
 
@@ -120,7 +120,7 @@ def load_parameters():
     LABEL_SMOOTHING = 0.                          # Epsilon value for label smoothing. Only valid for 'categorical_crossentropy' loss. See arxiv.org/abs/1512.00567.
 
     OPTIMIZER = 'Adam'                            # Optimizer. Supported optimizers: SGD, RMSprop, Adagrad, Adadelta, Adam, Adamax, Nadam.
-    LR = 0.001                                    # Learning rate. Recommended values - Adam 0.0002 - Adadelta 1.0.
+    LR = 0.0002                                    # Learning rate. Recommended values - Adam 0.0002 - Adadelta 1.0.
     CLIP_C = 5.                                   # During training, clip L2 norm of gradients to this value (0. means deactivated).
     CLIP_V = 0.                                   # During training, clip absolute value of gradients to this value (0. means deactivated).
     USE_TF_OPTIMIZER = True                       # Use native Tensorflow's optimizer (only for the Tensorflow backend).
@@ -148,7 +148,7 @@ def load_parameters():
     WARMUP_EXP = -1.5                             # Warmup steps for noam decay.
 
     # Training parameters
-    MAX_EPOCH = 500                               # Stop when computed this number of epochs.
+    MAX_EPOCH = 50                               # Stop when computed this number of epochs.
     BATCH_SIZE = 50                               # Size of each minibatch.
 
     HOMOGENEOUS_BATCHES = False                   # Use batches with homogeneous output lengths (Dangerous!!).
@@ -247,7 +247,7 @@ def load_parameters():
     RECURRENT_DROPOUT_P = 0.                      # Percentage of units to drop in recurrent layers.
     ATTENTION_DROPOUT_P = 0.                      # Percentage of units to drop in attention layers (0 means no dropout).
 
-    USE_NOISE = False                              # Use gaussian noise during training.
+    USE_NOISE = True                              # Use gaussian noise during training.
     NOISE_AMOUNT = 0.01                           # Amount of noise.
 
     USE_BATCH_NORMALIZATION = True                # If True it is recommended to deactivate Dropout.
@@ -307,7 +307,7 @@ def load_parameters():
                                                        # Saved on epoch 'RELOAD' will be used.
     RELOAD_EPOCH = True                                # Select whether we reload epoch or update number.
 
-    REBUILD_DATASET = True                             # Build again or use stored instance.
+    REBUILD_DATASET = True                            # Build again or use stored instance.
     MODE = 'training'                                  # 'training' or 'sampling' (if 'sampling' then RELOAD must
                                                        # be greater than 0 and EVAL_ON_SETS will be used).
 

@@ -96,7 +96,7 @@ def sample_ensemble(args, params):
         if params_prediction['pos_unk']:
             samples = predictions[0]
             alphas = predictions[1]
-            sources = [x.strip() for x in open(args.text, 'r').read().split('\n')]
+            sources = [x.strip() for x in open(args.text, 'r', encoding='utf-8').read().split('\n')]
             sources = sources[:-1] if len(sources[-1]) == 0 else sources
         else:
             samples = predictions

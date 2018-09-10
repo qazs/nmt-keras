@@ -87,3 +87,10 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+datasets
+trained_models
+examples
+local
+src
+config.py
