@@ -10,7 +10,7 @@ def load_parameters():
     DATASET_NAME = TASK_NAME                        # Dataset name.
     SRC_LAN = 'en'                                  # Language of the source text.
     TRG_LAN = 'cn'                                  # Language of the target text.
-    DATA_ROOT_PATH = 'app/%s/' % DATASET_NAME  # Path where data is stored.
+    DATA_ROOT_PATH = 'local/%s/' % DATASET_NAME  # Path where data is stored.
 
     # SRC_LAN or TRG_LAN will be added to the file names.
     TEXT_FILES = {'train': 'training.',        # Data files.
@@ -28,8 +28,8 @@ def load_parameters():
     EVAL_ON_SETS = ['val']                        # Possible values: 'train', 'val' and 'test' (external evaluator).
     EVAL_ON_SETS_KERAS = []                       # Possible values: 'train', 'val' and 'test' (Keras' evaluator). Untested..
     START_EVAL_ON_EPOCH = 1                       # First epoch to start the model evaluation.
-    EVAL_EACH_EPOCHS = True                       # Select whether evaluate between N epochs or N updates.
-    EVAL_EACH = 5                                 # Sets the evaluation frequency (epochs or updates).
+    EVAL_EACH_EPOCHS = True                      # Select whether evaluate between N epochs or N updates.
+    EVAL_EACH = 10                                 # Sets the evaluation frequency (epochs or updates).
 
     # Search parameters
     SAMPLING = 'max_likelihood'                   # Possible values: multinomial or max_likelihood (recommended).
@@ -58,7 +58,7 @@ def load_parameters():
     ALPHA_FACTOR = .6                             # Normalization according to |h|**ALPHA_FACTOR.
 
     # Sampling params: Show some samples during training.
-    SAMPLE_ON_SETS = []            # Possible values: 'train', 'val' and 'test'.
+    SAMPLE_ON_SETS = []             # Possible values: 'train', 'val' and 'test'.
     N_SAMPLES = 5                                 # Number of samples generated.
     START_SAMPLING_ON_EPOCH = 1                   # First epoch where to start the sampling counter.
     SAMPLE_EACH_UPDATES = 300                     # Sampling frequency (always in #updates).
@@ -117,7 +117,7 @@ def load_parameters():
     LOSS = 'categorical_crossentropy'
     CLASSIFIER_ACTIVATION = 'softmax'
     SAMPLE_WEIGHTS = True                         # Select whether we use a weights matrix (mask) for the data outputs
-    LABEL_SMOOTHING = 0.                          # Epsilon value for label smoothing. Only valid for 'categorical_crossentropy' loss. See arxiv.org/abs/1512.00567.
+    LABEL_SMOOTHING = 0.05                          # Epsilon value for label smoothing. Only valid for 'categorical_crossentropy' loss. See arxiv.org/abs/1512.00567.
 
     OPTIMIZER = 'Adam'                            # Optimizer. Supported optimizers: SGD, RMSprop, Adagrad, Adadelta, Adam, Adamax, Nadam.
     LR = 0.0002                                    # Learning rate. Recommended values - Adam 0.0002 - Adadelta 1.0.
@@ -148,9 +148,8 @@ def load_parameters():
     WARMUP_EXP = -1.5                             # Warmup steps for noam decay.
 
     # Training parameters
-    MAX_EPOCH = 50                               # Stop when computed this number of epochs.
+    MAX_EPOCH = 20                               # Stop when computed this number of epochs.
     BATCH_SIZE = 50                               # Size of each minibatch.
-    N_GPUS = 1                                    # Number of GPUs to use. Only for Tensorflow backend. Each GPU will receive mini-batches of BATCH_SIZE / N_GPUS.
 
     HOMOGENEOUS_BATCHES = False                   # Use batches with homogeneous output lengths (Dangerous!!).
     JOINT_BATCHES = 4                             # When using homogeneous batches, get this number of batches to sort.
@@ -179,13 +178,13 @@ def load_parameters():
     INNER_INIT = 'orthogonal'                     # Initialization function for inner RNN matrices.
     INIT_ATT = 'glorot_uniform'                   # Initialization function for attention mechism matrices
 
-    SOURCE_TEXT_EMBEDDING_SIZE = 32              # Source language word embedding size.
+    SOURCE_TEXT_EMBEDDING_SIZE = 256              # Source language word embedding size.
     SRC_PRETRAINED_VECTORS = None                 # Path to pretrained vectors (e.g.: DATA_ROOT_PATH + '/DATA/word2vec.%s.npy' % SRC_LAN).
                                                   # Set to None if you don't want to use pretrained vectors.
                                                   # When using pretrained word embeddings. this parameter must match with the word embeddings size
     SRC_PRETRAINED_VECTORS_TRAINABLE = True       # Finetune or not the target word embedding vectors.
 
-    TARGET_TEXT_EMBEDDING_SIZE = 32               # Source language word embedding size.
+    TARGET_TEXT_EMBEDDING_SIZE = 256               # Source language word embedding size.
     TRG_PRETRAINED_VECTORS = None                 # Path to pretrained vectors. (e.g. DATA_ROOT_PATH + '/DATA/word2vec.%s.npy' % TRG_LAN)
                                                   # Set to None if you don't want to use pretrained vectors.
                                                   # When using pretrained word embeddings, the size of the pretrained word embeddings must match with the word embeddings size.
@@ -193,8 +192,6 @@ def load_parameters():
 
     SCALE_SOURCE_WORD_EMBEDDINGS = False          # Scale source word embeddings by Sqrt(SOURCE_TEXT_EMBEDDING_SIZE).
     SCALE_TARGET_WORD_EMBEDDINGS = False          # Scale target word embeddings by Sqrt(TARGET_TEXT_EMBEDDING_SIZE).
-
-    TIE_EMBEDDINGS = False                        # Use the same embeddings for source and target language.
 
     N_LAYERS_ENCODER = 1                          # Stack this number of encoding layers.
     N_LAYERS_DECODER = 1                          # Stack this number of decoding layers.
@@ -215,7 +212,7 @@ def load_parameters():
     ATTENTION_MODE = 'add'                        # Attention mode. 'add' (Bahdanau-style), 'dot' (Luong-style) or 'scaled-dot'.
 
     # Encoder configuration
-    ENCODER_HIDDEN_SIZE = 32                      # For models with RNN encoder.
+    ENCODER_HIDDEN_SIZE = 256                      # For models with RNN encoder.
     BIDIRECTIONAL_ENCODER = True                  # Use bidirectional encoder.
     BIDIRECTIONAL_DEEP_ENCODER = True             # Use bidirectional encoder in all encoding layers.
     BIDIRECTIONAL_MERGE_MODE = 'concat'           # Merge function for bidirectional layers.
@@ -226,7 +223,7 @@ def load_parameters():
     INIT_LAYERS = ['tanh']
 
     # Decoder configuration
-    DECODER_HIDDEN_SIZE = 32                      # For models with RNN decoder.
+    DECODER_HIDDEN_SIZE = 256                      # For models with RNN decoder.
     ATTENTION_SIZE = DECODER_HIDDEN_SIZE
 
     # Skip connections parameters
@@ -248,12 +245,12 @@ def load_parameters():
     WEIGHT_DECAY = 1e-4                           # Regularization coefficient.
     RECURRENT_WEIGHT_DECAY = 0.                   # Regularization coefficient in recurrent layers.
 
-    DROPOUT_P = 0.                                # Percentage of units to drop (0 means no dropout).
+    DROPOUT_P = 0.1                                # Percentage of units to drop (0 means no dropout).
     RECURRENT_INPUT_DROPOUT_P = 0.                # Percentage of units to drop in input cells of recurrent layers.
     RECURRENT_DROPOUT_P = 0.                      # Percentage of units to drop in recurrent layers.
-    ATTENTION_DROPOUT_P = 0.                      # Percentage of units to drop in attention layers (0 means no dropout).
+    ATTENTION_DROPOUT_P = 0.1                      # Percentage of units to drop in attention layers (0 means no dropout).
 
-    USE_NOISE = True                              # Use gaussian noise during training.
+    USE_NOISE = False                              # Use gaussian noise during training.
     NOISE_AMOUNT = 0.01                           # Amount of noise.
 
     USE_BATCH_NORMALIZATION = True                # If True it is recommended to deactivate Dropout.
@@ -313,7 +310,7 @@ def load_parameters():
                                                        # Saved on epoch 'RELOAD' will be used.
     RELOAD_EPOCH = True                                # Select whether we reload epoch or update number.
 
-    REBUILD_DATASET = True                            # Build again or use stored instance.
+    REBUILD_DATASET = True                             # Build again or use stored instance.
     MODE = 'training'                                  # 'training' or 'sampling' (if 'sampling' then RELOAD must
                                                        # be greater than 0 and EVAL_ON_SETS will be used).
 
@@ -321,6 +318,7 @@ def load_parameters():
     TRAIN_ON_TRAINVAL = False                          # train the model on both training and validation sets combined.
     FORCE_RELOAD_VOCABULARY = False                    # force building a new vocabulary from the training samples
                                                        # applicable if RELOAD > 1
+
     # ================================================ #
     parameters = locals().copy()
     return parameters
