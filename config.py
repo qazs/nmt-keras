@@ -13,9 +13,11 @@ def load_parameters():
     DATA_ROOT_PATH = 'local/%s/' % DATASET_NAME  # Path where data is stored.
 
     # SRC_LAN or TRG_LAN will be added to the file names.
-    TEXT_FILES = {'train': 'training.',        # Data files.
+    TEXT_FILES = {'train': 'training.',             # Data files.
                   'val': 'dev.',
                   'test': 'test.'}
+
+    GLOSSARY = None                               # Glossary location. If not None, it overwrites translations according to this glossary file
 
     # Dataset class parameters
     INPUTS_IDS_DATASET = ['source_text', 'state_below']     # Corresponding inputs of the dataset.
@@ -306,6 +308,8 @@ def load_parameters():
         'target_text']
 
     SAMPLING_SAVE_MODE = 'list'                        # 'list': Store in a text file, one sentence per line.
+    PLOT_EVALUATION = False                            # If True, the evaluation will be plotted into the model folder.
+    
     VERBOSE = 1                                        # Verbosity level.
     RELOAD = 0                                         # If 0 start training from scratch, otherwise the model.
                                                        # Saved on epoch 'RELOAD' will be used.
